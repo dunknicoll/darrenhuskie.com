@@ -1,0 +1,67 @@
+/* Responsive grid generator
+--------------------------------------- */
+
+.row {
+    @extend .cf;
+}
+
+.equal-heights {
+	@include respond-min($desktop) {
+    	display: -webkit-flex;
+    	display: -moz-flex;
+    	display: -ms-flex;
+    	display: flex;
+  	}
+}
+
+.inline-row {
+  @extend .cf;
+  font-size: 0;
+  text-align: justify;
+  vertical-align: bottom;
+
+  &:after {
+    content: "";
+    display: inline-block;
+    width: 100%;
+  }
+
+  > * {
+    font-size: 16px;
+    font-size: 1rem;
+    text-align: left;
+  }
+}
+
+@mixin grid($prefix, $cols, $gutter, $grid-breakpoint: 48.0625em) {
+
+  $gridWidth: 100 - ($gutter * ($cols - 1));
+  $colWidth: $gridWidth / $cols;
+
+  .#{$prefix}-column {
+    width: 100%;
+
+    // So they don't collapse leftwards when empty
+    min-height: 1px;
+
+    // Account for bad percentage rounding in IE7
+    @include old-ie { margin-right: -1px; }
+  }
+
+  @include respond-min($grid-breakpoint) {
+
+    .#{$prefix}-column {
+      float: left;
+      width: $colWidth;
+
+      & + .#{$prefix}-column { margin-left: $gutter; }
+    }
+
+    @for $i from 2 through $cols {
+      .#{$prefix}-column.span-#{$i} {
+        width: ($colWidth * $i) + ($gutter * ($i - 1));
+      };
+    }
+  }
+
+}

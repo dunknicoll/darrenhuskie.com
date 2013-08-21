@@ -1,0 +1,49 @@
+/* Footer
+--------------------------------------- */
+
+footer {
+	@include px-rem(font-size, .75);
+	@include px-rem(margin-bottom, 1);
+	@include px-rem(padding, 1, 0);
+
+	.container {
+		@extend .cf;
+		border-top: 1px solid #dfdfdf;
+		@include px-rem(padding-top, 1);
+	}
+
+	@include respond-min($desktop) {
+		margin: 0;
+	}
+}
+
+.footer-copyright {
+	margin: 0;
+
+	@include respond-min($desktop) {
+		float: left;
+		max-width: 50%;
+	}
+}
+
+.footer-social-list {
+	@extend %cleanlist;
+
+	li {
+		float: left;
+
+		+ li {
+			@include px-rem(margin-left, 0.5);
+		}
+	}
+
+	@include respond-min($desktop) {
+		float: right;
+		max-width: 50%;
+	}
+}
+
+.footer-social-list-facebook { color: $facebook; }
+.footer-social-list-instagram { color: $instagram; }
+.footer-social-list-linkedin { color: $linkedin; }
+.footer-social-list-twitter { color: $twitter; }

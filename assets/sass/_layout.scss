@@ -1,0 +1,120 @@
+/* Variables
+--------------------------------------- */
+
+$font-colour: #999;
+$font-family: pnr, sans-serif;
+$facebook: #3b5998;
+$instagram: #4e433c;
+$linkedin: #0181b2;
+$twitter: #4099ff;
+
+
+
+/* Fonts
+--------------------------------------- */
+
+@font-face{font-family:pnlr;src:url('../fonts/proxima-nova/proximanova-light-webfont.eot');src:url('../fonts/proxima-nova/proximanova-light-webfont.eot?#iefix')format('embedded-opentype'),url('../fonta/proxima-nova/proximanova-light-webfont.woff')format('woff'),url('../fonts/proxima-nova/proximanova-light-webfont.ttf')format('truetype'),url('../fonts/proxima-nova/proximanova-light-webfont.svg#proxima_nova_ltregular')format('svg');font-style:normal;font-weight:normal;}
+@font-face{font-family:pnrb;src:url('../fonts/proxima-nova/proximanova-bold-webfont.eot');src:url('../fonts/proxima-nova/proximanova-bold-webfont.eot?#iefix')format('embedded-opentype'),url('../fonts/proxima-nova/proximanova-bold-webfont.woff')format('woff'),url('../fonts/proxima-nova/proximanova-bold-webfont.ttf')format('truetype'),url('../fonts/proxima-nova/proximanova-bold-webfont.svg#proxima_nova_rgbold')format('svg');font-style:normal;font-weight:normal;}
+@font-face{font-family:pnr;src:url('../fonts/proxima-nova/proximanova-regular-webfont.eot');src:url('../fonts/proxima-nova/proximanova-regular-webfont.eot?#iefix')format('embedded-opentype'),url('../fonts/proxima-nova/proximanova-regular-webfont.woff')format('woff'),url('../fonts/proxima-nova/proximanova-regular-webfont.ttf')format('truetype'),url('../fonts/proxima-nova/proximanova-regular-webfont.svg#proxima_nova_rgregular')format('svg');font-style:normal;font-weight:normal;}
+@font-face{font-family:pncr;src:url('../fonts/proxima-nova/proximanovacond-regular-webfont.eot');src:url('../fonts/proxima-nova/proximanovacond-regular-webfont.eot?#iefix')format('embedded-opentype'),url('../fonts/proxima-nova/proximanovacond-regular-webfont.woff')format('woff'),url('../fonts/proxima-nova/proximanovacond-regular-webfont.ttf')format('truetype'),url('../fonts/proxima-nova/proximanovacond-regular-webfont.svg#proxima_nova_cn_rgregular')format('svg');font-style:normal;font-weight:normal;}
+@font-face{font-family:pncl;src:url('../fonts/proxima-nova/proximanovacond-light-webfont.eot');src:url('../fonts/proxima-nova/proximanovacond-light-webfont.eot?#iefix')format('embedded-opentype'),url('../fonts/proxima-nova/proximanovacond-light-webfont.woff')format('woff'),url('../fonts/proxima-nova/proximanovacond-light-webfont.ttf')format('truetype'),url('../fonts/proxima-nova/proximanovacond-light-webfont.svg#proxima_nova_cn_ltregular')format('svg');font-style:normal;font-weight:normal;}
+@font-face{font-family:pncb;src:url('../fonts/proxima-nova/proximanovacond-semibold-webfont.eot');src:url('../fonts/proxima-nova/proximanovacond-semibold-webfont.eot?#iefix')format('embedded-opentype'),url('../fonts/proxima-nova/proximanovacond-semibold-webfont.woff')format('woff'),url('../fonts/proxima-nova/proximanovacond-semibold-webfont.ttf')format('truetype'),url('../fonts/proxima-nova/proximanovacond-semibold-webfont.svg#proxima_nova_cn_ltbold')format('svg');font-style:normal;font-weight:normal;}
+@font-face{font-family:ms;src:url('../fonts/mission-script/mission-script-webfont.eot');src:url('../fonts/mission-script/mission-script-webfont.eot?#iefix')format('embedded-opentype'),url('../fonts/mission-script/mission-script-webfont.woff')format('woff'),url('../fonts/mission-script/mission-script-webfont.ttf')format('truetype'),url('../fonts/mission-script/mission-script-webfont.svg#mission_scriptregular')format('svg');font-style:normal;font-weight:normal;}
+
+
+/* General
+--------------------------------------- */
+
+body {
+	color: $font-colour;
+	font-family: $font-family;
+	line-height: 1.5;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+}
+
+a {
+	color: #61a3e1;
+}
+
+.container {
+	margin: 0 auto;
+	max-width: 1200px;
+	width: 90%;
+}
+
+@include grid(global, 12, 4%);
+
+
+
+/* General
+--------------------------------------- */
+
+
+
+/* Animations
+--------------------------------------- */
+
+%bob {
+	-webkit-animation-name: bob;
+	-webkit-animation-duration: 2.5s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-delay: 0;
+	-webkit-animation-direction: alternate;
+	-webkit-animation-timing-function: ease-in-out;
+	-moz-animation-name: bob;
+	-moz-animation-duration: 2.5s;
+	-moz-animation-iteration-count: infinite;
+	-moz-animation-delay: 0;
+	-moz-animation-direction: alternate;
+	-moz-animation-timing-function: ease-in-out;
+}
+
+.bob:hover {
+	-webkit-animation-play-state: paused;
+}
+
+@-webkit-keyframes bob
+{
+	50%  { -webkit-transform:translateY(-5px); }
+  	100% { -webkit-transform:translateY(0);    }
+}
+
+@-moz-keyframes bob
+{
+	50%  { -moz-transform: translateY(-5px);  }
+  	100% { -moz-transform: translateY(0);     }
+}
+
+@-webkit-keyframes wiggle
+{
+	0%, 41% { -webkit-transform: translateX(0);    }
+	15% 	{ -webkit-transform: translateX(-2px); }
+	25% 	{ -webkit-transform: translateX(5px);  }
+	34% 	{ -webkit-transform: translateX(-2px); }
+}
+
+@-moz-keyframes wiggle
+{
+	0%, 41% { -moz-transform: translateX(0);    }
+	15% 	{ -moz-transform: translateX(-2px); }
+	25% 	{ -moz-transform: translateX(5px);  }
+  	34%     { -moz-transform: translateX(-2px); }
+}
+
+.get-in-touch
+{
+	display: inline-block;
+  	-webkit-animation-name: wiggle;
+  	-webkit-animation-duration: 3s;
+  	-webkit-animation-iteration-count: infinite;
+  	-webkit-animation-delay: 5s;
+  	-webkit-animation-direction: normal;
+  	-webkit-animation-timing-function: ease-in-out;
+  	-moz-animation-name: wiggle;
+  	-moz-animation-duration: 3s;
+  	-moz-animation-iteration-count: infinite;
+  	-moz-animation-delay: 5s;
+  	-moz-animation-direction: normal;
+  	-moz-animation-timing-function: ease-in-out;
+}

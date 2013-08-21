@@ -1,0 +1,93 @@
+/* Mixins
+--------------------------------------- */
+
+// Vendor prefixes
+@mixin vendor( $property, $value ) {
+	-webkit-#{$property}: $value;
+	   -moz-#{$property}: $value;
+	    -ms-#{$property}: $value;
+	     -o-#{$property}: $value;
+	        #{$property}: $value;
+}
+
+// Font-face
+@mixin fontface ($id, $url) {
+	@font-face {
+	    font-family: '#{$id}';
+	    src: url('#{$url}.eot');
+	    src: url('#{$url}.eot?#iefix') format('embedded-opentype'),
+	         url('#{$url}.woff') format('woff'),
+	         url('#{$url}.ttf') format('truetype'),
+	         url('#{$url}.svg##{$id}') format('svg');
+	    font-style: normal;
+	    font-weight: normal;
+	}
+}
+
+// Em and px to rem conversion
+@function fix8_unit_to_px($val) {
+	@if $val == auto { @return $val; }
+	@else {
+		@if unitless($val) {
+			@if $val == 0 { @return $val; }
+			@else { @return $val * $base-font-size; };
+		} @else { @return $val; };
+	}
+}
+
+@function fix8_unit_to_rem($val) {
+	@if $val == auto { @return $val; }
+	@else {
+		@if unitless($val) {
+			@if $val == 0 { @return $val; }
+			@else { @return $val+rem; };
+		} @else { @return $val; };
+	}
+}
+
+@mixin px-rem($prop, $val...) {
+	$n: length($val);
+	$i: 1;
+
+	$px-list: ();
+	$rem-list: ();
+
+	@while $i <= $n {
+		$px-list: append($px-list, fix8_unit_to_px(nth($val, $i)));
+		$rem-list: append($rem-list, fix8_unit_to_rem(nth($val, $i)));
+		$i: $i + 1;
+	}
+
+	#{$prop}: $px-list;
+	#{$prop}: $rem-list;
+}
+
+// CSS arrows
+@mixin arrow($color: #ccc, $direction: right, $height: 20px, $width: 20px) {
+	height: 0;
+  	width: 0;
+
+  	@if($direction == right) {
+	    border-top: $height/2 solid transparent;
+	    border-bottom: $height/2 solid transparent;
+	    border-left: $width solid $color;
+	}
+
+	@if($direction == left) {
+		border-top: $height/2 solid transparent;
+		border-bottom: $height/2 solid transparent;
+		border-right: $width solid $color;
+	}
+
+	@if($direction == up) {
+		border-left: $width/2 solid transparent;
+		border-right: $width/2 solid transparent;
+		border-bottom: $height solid $color;
+	}
+
+	@if($direction == down) {
+		border-left: $width/2 solid transparent;
+		border-right: $width/2 solid transparent;
+		border-top: $height solid $color;
+	}
+}

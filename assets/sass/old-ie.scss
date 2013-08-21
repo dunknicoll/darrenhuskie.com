@@ -1,0 +1,11 @@
+/* Re-compile styles for legacy IE only
+   ------------------------------------
+
+   Set $fix-mqs: width in config.scss
+   Fixed breakpoint for 'responsive'
+   IE8 output.
+--------------------------------------- */
+
+$old-ie: true;
+@import 'core/basic';
+@import 'layout';

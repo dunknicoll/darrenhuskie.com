@@ -1,0 +1,65 @@
+/* Banner
+--------------------------------------- */
+
+.banner {
+	overflow: hidden;
+	@include px-rem(padding, 1.5, 0, 1, 0);
+
+	a {
+		color: #222;
+	}
+
+	@include respond-min($desktop) {
+		background: url(../img/bg.jpg);
+		@include px-rem(margin-bottom, 1);
+		@include px-rem(padding, 1, 0);
+		@include vendor(background-size, cover);
+
+		a {
+			color: #fff;
+		}
+	}
+}
+
+.banner-title {
+	font-family: ms;
+	font-weight: 400;
+	margin: 0;
+	@include px-rem(font-size, 2.5);
+
+	@include respond-min($desktop) {
+		@extend %bob;
+		text-align: center;
+		@include px-rem(font-size, 4);
+		@include px-rem(margin-bottom, 3);
+		@include px-rem(padding-top, 2);
+	}
+}
+
+.banner-subtitle {
+	font-family: pncl;
+	font-weight: normal;
+	line-height: 1.5;
+	margin: 0;
+	@include px-rem(font-size, 1.625);
+
+	@include respond-min($desktop) {
+		color: #fff;
+		text-align: center;
+		@include px-rem(font-size, 2);
+		@include px-rem(margin-bottom, 5);
+
+		span {
+			background-color: #369;
+			background-color: rgba(97, 163, 225, 0.7);
+			display: inline-block;
+			line-height: 1;
+			@include px-rem(margin-bottom, .625);
+			@include px-rem(padding, .375, .5, .5, .5);
+		}
+	}
+
+	@include respond-min(60em) {
+		@include px-rem(font-size, 2.5);
+	}
+}

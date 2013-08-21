@@ -1,0 +1,22 @@
+/* Constants
+--------------------------------------- */
+
+// The body font size
+$base-font-size: 16px;
+
+// The target output query for IE
+$fix-mqs: 62.5em;
+
+// Auto font scaling
+$font-scaling: true;
+
+
+
+/* Module and feature inclusion
+--------------------------------------- */
+
+// Responsive banner
+$banner: false;
+
+// Responsive quote carousel
+$quote-carousel: false;
