@@ -1,14 +1,15 @@
 ---
+
 ---
 
 {% include header.html %}
 
-<div class="container">
-  <h1 class="title"><a href="/">{{ site.name }}</a></h1>
-  <a class="extra" href="/">home</a>
-</div>
-
-{{ content }}
-
+<section class="content">
+	<div class="container">
+		<article>
+		{{ content }}
+		</article>
+	</div>
+</section>
 
 {% include footer.html %}

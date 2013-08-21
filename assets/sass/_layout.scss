@@ -37,6 +37,21 @@ a {
 	color: #61a3e1;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	margin: 0 0 1em 0;
+	padding: 0;
+}
+
+h1 {
+	letter-spacing: -1px;
+	margin-bottom: 0.5em;
+	@include px-rem(font-size, 3);
+}
+
+ol, p, ul {
+	margin-bottom: 2em;
+}
+
 .container {
 	margin: 0 auto;
 	max-width: 1200px;
@@ -50,6 +65,29 @@ a {
 /* General
 --------------------------------------- */
 
+.content {
+	padding: 2em 0;
+
+	.container {
+		@extend .cf;
+	}
+}
+
+
+/* Article
+--------------------------------------- */
+
+article {
+	float: left;
+	width: 65%;
+}
+
+.article-content {
+
+	p:last-child {
+		margin: 0;
+	}
+}
 
 
 /* Animations
