@@ -47,15 +47,17 @@ function addHistoryAPIClickHandlers() {
 
 function loadContent(link) {
 	// Prepare the URL parameter
-	var content_url = '/content/' + link.substring(12);
-	content_url = content_url.replace('.html', '.json');
+	var content_url = '/content/content.json',
+		page_container = $('.page');
+
+	console.log(content_url);
+	console.log(link);
 
 	// Load the desired content through AJAX
-	$.ajax({
-  		dataType: 'json',
-  		url: content_url,
-  		success: function() {
-  			console.log('Boom');
-  		}
-	});
+	$.getJSON(content_url, function(data) {
+        console.log('Data: ' + data[link]);
+
+        // Replace the page content
+        page_container.html(data[link]);
+    });
 }
