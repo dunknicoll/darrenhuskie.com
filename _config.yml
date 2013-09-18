@@ -1,4 +1,5 @@
-exclude: [node_modules, Gruntfile.js, .sass-cache]
+exclude: [.sass-cache, node_modules, Gruntfile.js]
 name: Darren Huskie
 markdown: redcarpet
 pygments: true
+safe: false
