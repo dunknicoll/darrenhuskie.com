@@ -8,7 +8,7 @@ var DH = {
 
 		if(supported) {
 			// Add click event handlers to our links
-			addHistoryAPIClickHandlers();
+			addHistoryAPIHandlers();
 		}
 	},
 
@@ -30,12 +30,18 @@ function supportsHistoryAPI() {
 	return !!(window.history && history.pushState);
 }
 
-function addHistoryAPIClickHandlers() {
+function addHistoryAPIHandlers() {
+
 	$('a').click(function(event) {
 		event.preventDefault();
 		loadContent($(this).attr('href'));
-    	//history.pushState(null, null, link.href);
+    	history.pushState(null, null, $(this).attr('href'));
   	});
+
+	window.addEventListener('popstate', function(e) {
+    	//console.log('Popped');
+    	//loadContent(window.location.href);
+	});
 }
 
 function loadContent(link) {
@@ -51,6 +57,6 @@ function loadContent(link) {
         console.log('Data: ' + data[link]);
 
         // Replace the page content
-        page_container.html(data[link]);
+        page_container.html(data[link].content);
     });
 }

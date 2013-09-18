@@ -1,50 +1,56 @@
 module Jekyll
-  require 'json'
+	require 'json'
 
-  class JsonFile < StaticFile
-    def write(dest)
-      begin
-        super(dest)
-      rescue
-      end
+	# Fix issue whereby Jekyll cleans out unrecognised files
+	class JsonFile < StaticFile
+    	def write(dest)
+      		begin
+        		super(dest)
+      			rescue
+      		end
+			true
+    	end
+  	end
 
-      true
-    end
-  end
+  	# Generate the required JSON file to hold all posts and pages
+  	class JSONGenerator < Generator
+    	safe true
+    	priority :low
 
-  class JSONGenerator < Generator
-    safe true
-    priority :low
+    	def generate(site)
 
-    def generate(site)
-      # Converter for .md > .html
-      converter = site.getConverterImpl(Jekyll::Converters::Markdown)
+      		# Converter for Markdown to HTML
+      		converter = site.getConverterImpl(Jekyll::Converters::Markdown)
 
-      # Start building the path
-      path = "_site/content"
-      hash = Hash.new("0")
+      		# Start building the path to the JSON file and an empty hash
+      		path = "_site/content"
+      		hash = Hash.new("0")
 
-      # Iterate over all posts
-      site.posts.each do |post|
+      		# Iterate over all posts
+      		site.posts.each do |post|
 
-        # Encode the HTML to JSON
-        link = post.url
-        hash[link] = {"title" => post.title, "content" => converter.convert(post.content)}
-      end
+        		# Encode the post HTML content to JSON
+        		link = post.url
+        		hash[link] = { "title" => post.title, "content" => converter.convert(post.content) }
+      		end
 
-	  	# hash = [hashstring.join(',')]
+      		# Iterate over all pages
+      		site.pages.each do |page|
 
-	    # Create the directories from the path
-	    FileUtils.mkpath(path) unless File.exists?(path)
+        		# Encode the page HTML content to JSON
+        		link = page.url
+        		hash[link] = { "title" => page.data['title'], "content" => converter.convert(page.content) }
+      		end
 
-	    # Create the JSON file and inject the data
-	    f = File.new("#{path}/content.json", "w+")
-	    f.puts JSON.generate(hash)
+	    	# Create the directories from the path
+	    	FileUtils.mkpath(path) unless File.exists?(path)
 
-	    site.static_files << Jekyll::JsonFile.new(site, site.dest, "content", "content.json")
+	    	# Create the JSON file and inject the data
+	    	f = File.new("#{path}/content.json", "w+")
+	    	f.puts JSON.generate(hash)
 
-    end
+	    	site.static_files << Jekyll::JsonFile.new(site, site.dest, "content", "content.json")
 
-  end
-
+    	end
+	end
 end
