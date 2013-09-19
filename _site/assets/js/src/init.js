@@ -39,6 +39,7 @@ function addHistoryAPIHandlers() {
   	});
 
 	window.addEventListener('popstate', function(e) {
+    	//console.log('Popped');
     	loadContent(window.location.pathname);
 	});
 }
