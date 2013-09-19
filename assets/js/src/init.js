@@ -40,23 +40,38 @@ function addHistoryAPIHandlers() {
 
 	window.addEventListener('popstate', function(e) {
     	//console.log('Popped');
-    	//loadContent(window.location.href);
+    	loadContent(window.location.pathname);
 	});
 }
 
 function loadContent(link) {
-	// Prepare the URL parameter
-	var content_url = '/content/content.json',
-		page_container = $('.page');
+	var body = $('body'),
+		content_url = '/content/content.json',
+		page_container = $('.page-container');
 
-	console.log(content_url);
-	console.log(link);
+	// Check if link is homepage
+	if(link == '/') {
+		link = '/index.html';
+	}
 
-	// Load the desired content through AJAX
-	$.getJSON(content_url, function(data) {
-        console.log('Data: ' + data[link]);
+	// Hide the page content, in preparation for the content update
+    page_container.addClass('hide');
 
-        // Replace the page content
-        page_container.html(data[link].content);
-    });
+    var t = setTimeout(function() {
+
+		// Load the desired content through AJAX
+		$.getJSON(content_url, function(data) {
+
+		    // Replace the page content
+		    page_container.html(data[link].content);
+
+		    // Update the body class
+		    body.removeClass();
+		    body.addClass(data[link].body_class);
+
+		    // Display the content again after a small delay
+		    page_container.removeClass('hide')
+	    });
+
+    }, 1000);
 }

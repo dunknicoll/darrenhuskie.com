@@ -56,3 +56,21 @@ header {
   	line-height: 25px;
   	text-transform: uppercase;
 }
+
+.page {
+
+}
+
+.page-container {
+	@extend .container;
+	@include vendor(transition, margin 1s ease-in);
+
+	&.hide {
+		margin-left: -200%;
+	}
+
+	.home & {
+			max-width: 100%;
+			width: 100%;
+		}
+}

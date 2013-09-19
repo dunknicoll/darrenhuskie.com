@@ -39,7 +39,7 @@ module Jekyll
 
         		# Encode the page HTML content to JSON
         		link = page.url
-        		hash[link] = { "title" => page.data['title'], "content" => converter.convert(page.content) }
+        		hash[link] = { "title" => page.data['title'], "body_class" => page.data['body_class'], "content" => converter.convert(page.content) }
       		end
 
 	    	# Create the directories from the path
