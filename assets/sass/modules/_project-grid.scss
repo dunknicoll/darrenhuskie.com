@@ -1,0 +1,22 @@
+/* Project grid
+--------------------------------------- */
+
+.project-grid {
+	overflow: hidden;
+}
+
+.project-thumbnail {
+	width: 100%;
+}
+
+.project {
+
+	@include respond-min($desktop) {
+		float: left;
+		width: 50%;
+	}
+
+	@include respond-min(60em) {
+		width: 25%;
+	}
+}

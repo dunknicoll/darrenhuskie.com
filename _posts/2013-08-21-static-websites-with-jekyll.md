@@ -1,4 +1,5 @@
 ---
+body_class: red
 layout: post
 title: Static websites with Jekyll
 ---

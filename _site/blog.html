@@ -17,6 +17,9 @@
 
         <title>Blog &mdash; Darren Huskie</title>
 
+        <!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/old-ie.css"><![endif]-->
+        <!--[if gt IE 8]><!--><link rel="stylesheet" href="/assets/css/style.css"><!--<![endif]-->
+
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/img/icons/apple-touch-icon-114x114.png">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/img/icons/apple-touch-icon-72x72.png">
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/icons/apple-touch-icon-144x144.png">
@@ -26,34 +29,25 @@
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-		<script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener('click',function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;'href'in d&&(d.href.indexOf('http')||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,'standalone')</script>
-
 		<meta http-equiv="cleartype" content="on">
 
-        <!--[if lte IE 8]><link rel="stylesheet" href="/assets/css/old-ie.css"><![endif]-->
-        <!--[if gt IE 8]><!--><link rel="stylesheet" href="/assets/css/style.css"><!--<![endif]-->
-
+		<script>(function(a,b,c){if(c in b&&b[c]){var d,e=a.location,f=/^(a|html)$/i;a.addEventListener('click',function(a){d=a.target;while(!f.test(d.nodeName))d=d.parentNode;'href'in d&&(d.href.indexOf('http')||~d.href.indexOf(e.host))&&(a.preventDefault(),e.href=d.href)},!1)}})(document,window.navigator,'standalone')</script>
         <script src="/assets/js/src/libs/custom-modernizr.js"></script>
 
     </head>
 
-    <body class="">
+    <body class="green">
 
     	<header>
     		<div class="container">
-    			<a class="header-logo" href="/index.html">Darren Huskie</a>
+				<a class="header-logo" href="/" title="Darren Huskie - Web Developer">Darren Huskie</a>
 
-    			<nav class="header-nav">
-	    			<ul class="header-nav-list">
-	    				<li><a href="/blog.html" title="Blog">Blog</a></li>
-	    			</ul>
-	    		</nav>
-
-	    		<span class="header-nav-toggle">
-	    			<span class="header-nav-toggle-grippy">Toggle</span>
-        			<span class="header-nav-toggle-label">Menu</span>
-	    		</span>
+				<nav class="header-menu">
+					<ul class="header-menu-list">
+						<li><a href="/" rel="internal" title="Home">Home</a></li>
+						<li><a href="/blog.html" rel="internal" title="Blog">Blog</a></li>
+					</ul>
+				</nav>
     		</div>
     	</header>
 
@@ -63,7 +57,8 @@
 <section class="content">
 	<div class="container">
 		<article>
-		<p>Blog</p>
+		<h1>Blog</h1>
+<p>Blog content to follow.</p>
 		</article>
 	</div>
 </section>
@@ -73,7 +68,7 @@
 
           	<footer>
           		<div class="container">
-          			<p class="footer-copyright">&copy; 2012. <a href="/" title="Darren Huskie">Darren Huskie</a>. All rights reserved.</p>
+          			<p class="footer-copyright">&copy; 2012. <a href="/index.html" title="Darren Huskie">Darren Huskie</a>. All rights reserved.</p>
           			<ul class="footer-social-list">
 						<li><a class="footer-social-list-facebook" href="http://www.facebook.com/darren.huskie" rel="external" title="Darren Huskie on Facebook">Facebook</a></li>
 						<li><a class="footer-social-list-instagram" href="http://instagram.com/huskie/" rel="external" title="Darren Huskie on Instagram">Instagram</a></li>

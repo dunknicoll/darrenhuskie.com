@@ -1,0 +1,56 @@
+/* Header
+--------------------------------------- */
+
+header {
+	@include px-rem(padding, 2, 0);
+
+	.container {
+		overflow: hidden;
+	}
+}
+
+.header-logo {
+	font-family: ms;
+	font-weight: 400;
+	margin: 0;
+	@include px-rem(font-size, 2.5);
+
+	@include respond-min($desktop) {
+		@extend %bob;
+		@include px-rem(font-size, 4);
+		@include px-rem(margin-bottom, 1);
+	}
+}
+
+.header-menu {
+
+	@include respond-min($desktop) {
+	}
+}
+
+.page {
+
+}
+
+.page-container {
+	@extend .container;
+	@include vendor(transition, margin 1s ease-in);
+
+	.container {
+		width: 100%;
+	}
+
+	&.hide {
+		margin-left: -200%;
+	}
+
+	.home & {
+		max-width: 100%;
+		width: 100%;
+	}
+
+	.wide &, .wide & .container {
+		max-width: 100%;
+		width: 100%;
+	}
+}

@@ -1,77 +1,101 @@
-var DH = {
+// Functions
 
-	doHistoryAPI: function() {
-		// History API script
+var DH = DH || {};
 
-		// Check whether the browser supports the History API
-		var supported = supportsHistoryAPI();
+DH.doHistoryAPI = function() {
+	// History API script
 
-		if(supported) {
-			// Add click event handlers to our links
-			addHistoryAPIHandlers();
-		}
-	},
+	// Check whether the browser supports the History API
+	var supported = DH.supportsHistoryAPI();
 
-    applyAnimations: function() {
-        // Apply animations to elements
-    }
+	if(supported) {
+		// Add the loader
+		DH.addLoadElement();
 
-}
+		// Add click event handlers to our links
+		DH.addHistoryAPIHandlers();
+	}
+};
 
-$(function()
-{
-	DH.doHistoryAPI();
-    DH.applyAnimations();
-});
-
-// Static functions
-
-function supportsHistoryAPI() {
+DH.supportsHistoryAPI = function() {
 	return !!(window.history && history.pushState);
-}
+};
 
-function addHistoryAPIHandlers() {
+DH.addLoadElement = function() {
+	var load_element = document.createElement('div'),
+		page = $('body');
 
-	$('a').click(function(event) {
+	load_element.className = 'page-loader';
+	page.prepend(load_element);
+};
+
+DH.addHistoryAPIHandlers = function() {
+	$('a[rel=internal]').click(function(event) {
 		event.preventDefault();
-		loadContent($(this).attr('href'));
-    	history.pushState(null, null, $(this).attr('href'));
-  	});
+		DH.loadContent($(this).attr('href'));
+		history.pushState(null, null, $(this).attr('href'));
+	});
 
 	window.addEventListener('popstate', function(e) {
-    	//console.log('Popped');
-    	loadContent(window.location.pathname);
+		//loadContent(window.location.pathname);
 	});
-}
+};
 
-function loadContent(link) {
+DH.loadContent = function(link) {
 	var body = $('body'),
 		content_url = '/content/content.json',
-		page_container = $('.page-container');
+		home = false,
+		page_container = $('.page-container'),
+		page_loader = $('.page-loader');
 
 	// Check if link is homepage
 	if(link == '/') {
+		home = true;
 		link = '/index.html';
 	}
 
-	// Hide the page content, in preparation for the content update
-    page_container.addClass('hide');
+	// Show the loader, in preparation for content load
+	page_loader.addClass('show');
 
-    var t = setTimeout(function() {
+	var t = setTimeout(function() {
 
-		// Load the desired content through AJAX
-		$.getJSON(content_url, function(data) {
+	// Load the desired content through AJAX
+	$.getJSON(content_url, function(data) {
 
-		    // Replace the page content
-		    page_container.html(data[link].content);
+		// Replace the page content
+		if(home) {
+		   	page_container.html(data[link].content);
+		}
+		else {
+		   	page_container.html(data[link].title + data[link].content);
+			}
 
 		    // Update the body class
 		    body.removeClass();
 		    body.addClass(data[link].body_class);
 
-		    // Display the content again after a small delay
-		    page_container.removeClass('hide')
-	    });
+		    // Hide the loader, now the content has loaded
+		    page_loader.removeClass('show');
 
-    }, 1000);
-}
+		    // Re-bind the click event handlers
+		    DH.addHistoryAPIHandlers();
+		});
+	}, 2000);
+};
+
+DH.applyAnimations = function() {
+    // Apply animations to elements
+};
+
+
+// DOM ready function calls
+(function ($, window, document, undefined) {
+
+	'use strict';
+
+  	$(function () {
+    	DH.doHistoryAPI();
+    	DH.applyAnimations();
+  	});
+
+})(jQuery, window, document);

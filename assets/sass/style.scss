@@ -2,9 +2,10 @@
 
 @import 'layout';
 
-@import 'structure/header';
-@import 'structure/footer';
+@import 'partials/header';
+@import 'partials/footer';
 
 @import 'modules/banner';
+@import 'modules/project-grid';
 
 @import 'shame';
