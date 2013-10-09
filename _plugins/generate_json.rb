@@ -39,7 +39,8 @@ module Jekyll
 
         		# Encode the page HTML content to JSON
         		link = page.url
-        		hash[link] = { "body_class" => page.data['body_class'], "content" => converter.convert(page.content), "title" => '<h1>' + page.data["content_title"] + '</h1>' }
+        		@content = Liquid::Template.parse(page.content)
+        		hash[link] = { "body_class" => page.data['body_class'], "content" => converter.convert(@content.render), "title" => '<h1>' + page.data["content_title"] + '</h1>' }
       		end
 
 	    	# Create the directories from the path
