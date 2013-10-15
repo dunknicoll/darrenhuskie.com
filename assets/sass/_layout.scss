@@ -108,7 +108,7 @@ ol, p, ul {
 .page-loader {
 	height: 100%;
 	opacity: 0;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	width: 100%;
 	z-index: -1;
