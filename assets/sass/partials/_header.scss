@@ -7,6 +7,13 @@ header {
 	.container {
 		overflow: hidden;
 	}
+
+	.sky & {
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
 }
 
 .header-logo {
@@ -19,6 +26,13 @@ header {
 		@extend %bob;
 		@include px-rem(font-size, 4);
 		@include px-rem(margin-bottom, 1);
+	}
+
+	.home & {
+		color: #fff;
+		display: block;
+		margin: .5em auto 0 auto;
+		text-align: center;
 	}
 }
 
@@ -40,13 +54,23 @@ header {
 		width: 100%;
 	}
 
-	&.hide {
-		margin-left: -200%;
-	}
-
-	.home & {
+	.sky & {
 		max-width: 100%;
 		width: 100%;
+
+		.container {
+			max-width: 1200px;
+			width: 90%;
+		}
+
+		.banner .container {
+			max-width: 100%;
+			width: 100%;
+		}
+	}
+
+	&.hide {
+		margin-left: -200%;
 	}
 
 	.wide &, .wide & .container {
