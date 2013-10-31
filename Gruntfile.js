@@ -1,5 +1,16 @@
+/*
+ * Gruntfile
+ * http://darrenhuskie.com
+ * @author Darren Huskie
+ */
+
+ 'use strict';
+
+
+// Grunt module
 module.exports = function(grunt) {
 
+	// Load required npm tasks
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-contrib-concat');
   	grunt.loadNpmTasks('grunt-contrib-sass');
@@ -7,106 +18,109 @@ module.exports = function(grunt) {
   	grunt.loadNpmTasks('grunt-contrib-watch');
   	grunt.loadNpmTasks('grunt-jekyll');
 
-  grunt.initConfig({
+  	// Grunt configuration
+  	grunt.initConfig({
 
-	jekyll: {
-		server : {
-			server : true,
-			server_port : 4000,
-			auto : true
-		},
-    	dist: {
-      		options: {
-        		config: '_config.yml, _config.build.yml'
-      		}
-    	},
-    	serve: {
-      		options: {
-        		drafts: true
-      		}
-    	}
-  	},
+  		pkg: grunt.file.readJSON('package.json'),
 
-    sass:
-    {
-      options:
-      {
-        style: 'compressed'
-      },
-      dist:
-      {
-        files:
-        {
-          'assets/css/style.css' : 'assets/sass/style.scss',
-          'assets/css/old-ie.css' : 'assets/sass/old-ie.scss'
-        }
-      }
-    },
+		jekyll: {
+			server: {
+				server : true,
+				server_port : 4000,
+				auto : true
+			},
+	    	dist: {
+	      		options: {
+	        		config: '_config.yml, _config.build.yml'
+	      		}
+	    	},
+	    	serve: {
+	      		options: {
+	        		drafts: true
+	      		}
+	    	}
+	  	},
 
-
-    concat:
-    {
-      dist:
-      {
-        src: [
-          'assets/js/src/libs/jquery-1.10.1.min.js',
-          'assets/js/src/init.js'
-        ],
-        dest: 'assets/js/build/build.js'
-      }
-    },
-
-    uglify: {
-      my_target: {
-        files: {
-          'assets/js/build/build.min.js': ['assets/js/build/build.js']
-        }
-      }
-    },
+	    sass:
+	    {
+	      options:
+	      {
+	        style: 'compressed'
+	      },
+	      dist:
+	      {
+	        files:
+	        {
+	          'assets/css/style.css' : 'assets/sass/style.scss',
+	          'assets/css/old-ie.css' : 'assets/sass/old-ie.scss'
+	        }
+	      }
+	    },
 
 
-    watch:
-    {
-    	jekyll: {
-			files: ['templates/*.html'],
-			tasks: ['jekyll:serve']
-		},
+	    concat:
+	    {
+	      dist:
+	      {
+	        src: [
+	          'assets/js/src/libs/jquery-1.10.1.min.js',
+	          'assets/js/src/init.js'
+	        ],
+	        dest: 'assets/js/build/build.js'
+	      }
+	    },
 
-    	css:
-      	{
-        	files: 'assets/sass/**/*.scss',
-        	tasks: ['sass'],
-        	option:
-        	{
-          		livereload: true
-        	}
-      	},
-
-      	concat:
-      	{
-        	files: 'assets/js/src/**/*.js',
-        	tasks: ['concat']
-      	},
-
-      	scripts: {
-        	files: ['assets/js/build/build.js'],
-        	tasks: ['uglify']
-      	}
-    },
-
-    concurrent: {
-        target: {
-            tasks: ['jekyll:server', 'watch'],
-            options: {
-                logConcurrentOutput: true
-            }
-        }
-    }
-
-});
+	    uglify: {
+	      dist: {
+	        files: {
+	          'assets/js/build/build.min.js': ['assets/js/build/build.js']
+	        }
+	      }
+	    },
 
 
-  	// By default, lint and run all tests
-	grunt.registerTask('default', ['concurrent:target']);
+	    watch:
+	    {
+	    	jekyll: {
+				files: ['templates/*.html'],
+				tasks: ['jekyll:serve']
+			},
+
+	    	css:
+	      	{
+	        	files: 'assets/sass/**/*.scss',
+	        	tasks: ['sass']
+	      	},
+
+	      	concat:
+	      	{
+	        	files: 'assets/js/src/**/*.js',
+	        	tasks: ['concat']
+	      	},
+
+	      	scripts: {
+	        	files: ['assets/js/build/build.js'],
+	        	tasks: ['uglify']
+	      	}
+	    }
+
+	});
+
+
+  	// Register the default grunt task - run from command line using 'grunt'
+	grunt.registerTask('default', [
+	    'sass:dist',
+	    'concat:dist',
+	    'uglify:dist',
+	    'watch'
+	]);
+
+	// Register the build grunt task - run from command line using 'grunt build'
+	grunt.registerTask('build', [
+		'sass:dist',
+		'concat:dist',
+		'uglify:dist',
+		'jekyll:server'
+	]);
 
 };

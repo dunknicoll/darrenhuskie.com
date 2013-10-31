@@ -40,11 +40,13 @@ DH.addHistoryAPIHandlers = function() {
 	$('a[rel=internal]').click(function(event) {
 		event.preventDefault();
 		DH.loadContent($(this).attr('href'));
-		history.pushState(null, null, $(this).attr('href'));
+		history.pushState($(this).text(), $(this).text(), $(this).attr('href'));
 	});
 
 	window.addEventListener('popstate', function(e) {
-		//loadContent(window.location.pathname);
+		if(e.state) {
+			DH.loadContent(window.location.pathname);
+		}
 	});
 };
 
